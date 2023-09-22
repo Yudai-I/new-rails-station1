@@ -1,0 +1,9 @@
+<h1>作品詳細</h1>
+
+<h2>作品名<%= @movie.name %></h2><br>
+<h2>公開年<%= @movie.year %></h2><br>
+<h2>概要<%= @movie.description %></h2><br>
+<h2>画像<%= image_tag @movie.image_url %></h2><br>
+<h2>上映中か<%= @movie.is_showing == true ? '上映中' : '上映予定' %></h2><br>
+<h2>作成日時<%= @movie.created_at %></h2><br>
+<h2>更新日時<%= @movie.updated_at %></h2><br>

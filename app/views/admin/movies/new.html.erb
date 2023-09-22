@@ -1,0 +1,17 @@
+<%= form_with model: [:admin, @movie],local:true do |f| %>
+<%= flash[:error] %>
+<h4>作品名</h4>
+<%= f.text_field :name %>
+<h4>公開年</h4>
+<%= f.text_field :year %>
+<h4>概要</h4>
+<%= f.text_area :description %>
+<h4>画像</h4>
+<%= f.text_field :image_url %>
+<h4>上映中か</h4>
+<%= f.select :is_showing,[['上映中',1],['上映予定',0]], { include_blank: true, selected: 0} %>
+
+<%= f.submit '登録' %>
+<% end %>
+
+<div>
