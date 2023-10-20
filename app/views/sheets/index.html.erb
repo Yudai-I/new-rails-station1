@@ -1,2 +1,16 @@
-<h1>Sheets#index</h1>
-<p>Find me in app/views/sheets/index.html.erb</p>
+<table>
+  <tr>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+  </tr>
+
+  <% @sheets.each do |sheet| %>
+    <tr>
+      <td><%= sheet.column %></td>
+      <td><%= sheet.row %></td>
+    </tr>
+  <% end %>
+</table>

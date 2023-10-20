@@ -24,6 +24,7 @@
   <td><%= image_tag movie.image_url, size: '100x100' %></td>
   <td><%= movie.created_at %></td>
   <td><%= movie.updated_at %></td>
+  <td><%= link_to '詳細', admin_movie_path(movie.id) %></td>
   <td><%= link_to '編集', edit_admin_movie_path(movie.id) %></td>
   <td><%= link_to '削除', admin_movie_path(movie.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
  </tr>
