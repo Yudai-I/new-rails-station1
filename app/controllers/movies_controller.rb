@@ -1,15 +1,29 @@
 class MoviesController < ApplicationController
   def index
-    keyword = params[:name]
-    if params[:is_showing] == nil
-      @movies = Movie.all
-    elsif params[:is_showing] == "2"
-      @movies = Movie.where('name LIKE ?', "%#{keyword}%").or(Movie.where('description LIKE ?', "%#{keyword}%"))
-    else
-      @movies = Movie.where('name LIKE ?', "%#{keyword}%").or(Movie.where('description LIKE ?', "%#{keyword}%")).where(is_showing: params[:is_showing])
-    end
-    
     @movie = Movie.new
+    keyword = params[:name]
+    show = params[:is_showing]
+
+    if show == "" && keyword == ""
+  		@movies = Movie.all
+  	end
+    
+  	# @rangeは全てか上映中か上映予定か絞ったMovie配列
+  	if  show == "1"
+  		@range = Movie.where(is_showing: true)
+  	elsif show == "0"
+  		@range = Movie.where(is_showing: false)
+  	else
+  		@range = Movie.all
+  	end
+
+    # @rangeをさらに絞り込む
+  	if keyword.blank?
+  		@movies = @range
+  	else
+  		@movies = @range.merge(Movie.where('name LIKE ?', "%#{keyword}%").or(Movie.where('description LIKE ?', "%#{keyword}%")))
+  	end
+  
   end
 
   def show

@@ -1,44 +1,41 @@
-<%= form_with url: movies_path, method: :get, local: true do |f| %>
-	<div class="search">
+<%= form_with url: movies_path, local: true, method: :get do |f| %>
+	<div class="name">
 		<%= f.text_field :name %>
 		<%= f.submit "検索する" %>
 	</div>
-    <div class="radio_button">
+    <div class="is_showing">
 		<%= f.label :is_showing,"全て" %>
-		<%= f.radio_button :is_showing, 2, checked: true %>
+		<%= f.radio_button :is_showing, 'all', checked: true %>
 	</div>
-	<div class="radio_button">
+	<div class="is_showing">
 		<%= f.label :is_showing,"公開中" %>
-		<%= f.radio_button :is_showing, 1 %>
+		<%= f.radio_button :is_showing, '1', checked: params[:is_showing] == '1' %>
 	</div>
-	<div class="radio_button">
+	<div class="is_showing">
 		<%= f.label :is_showing,"公開予定" %>
-		<%= f.radio_button :is_showing, 0 %>
+		<%= f.radio_button :is_showing, '0', checked: params[:is_showing] == '0' %>
 	</div>
+    <div>
+    <%= link_to '投稿フォーム', '/admin/movies/new' %>
+	<%= link_to 'admin一覧', '/admin/movies' %>
+    </div>
 <% end %>
 
-<% @movies.each do |movie| %>
 <table>
  <tr>
-  <th>ID</th>
   <th>映画タイトル</th>
   <th>公開年</th>
   <th>上映中か</th>
   <th>概要</th>
   <th>画像URL</th>
-  <th>作成日時</th>
-  <th>更新日時</th>
  <tr>
-
+<% @movies.each do |movie| %>
  <tr>
-  <td><%= movie.id %></td>
   <td><%= movie.name %></td>
   <td><%= movie.year %></td>
   <td><%= movie.is_showing == true ? '上映中' : '上映予定' %></td>
   <td><%= movie.description %></td>
   <td><%= image_tag movie.image_url, size: '100x100' %></td>
-  <td><%= movie.created_at %></td>
-  <td><%= movie.updated_at %></td>
  </tr>
-</table>
 <% end %>
+</table>
