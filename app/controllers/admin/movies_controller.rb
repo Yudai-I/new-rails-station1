@@ -1,10 +1,12 @@
 class Admin::MoviesController < ApplicationController
   def index
     @movies = Movie.all
+    @schedules = Schedule.all
   end
 
   def show
     @movie = Movie.find(params[:id])
+    @schedules = Schedule.where(movie_id: @movie.id)
   end
 
   def new

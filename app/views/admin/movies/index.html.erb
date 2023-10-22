@@ -29,6 +29,19 @@
   <td><%= link_to '削除', admin_movie_path(movie.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
  </tr>
 </table>
+<table>
+<% @schedules.each do |schedule| %>
+    <% if schedule.movie_id == movie.id %>
+    <tr>
+      <td><%= schedule.movie_id %></td>
+      <td><%= link_to "#{schedule.movie.name}", admin_schedule_path(schedule.id) %></td>
+      <td><%= schedule.start_time %></td>
+      <td><%= schedule.end_time %></td>
+      <td><%= link_to '削除', admin_schedule_path(schedule.id), method: :delete %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
 <% end %>
 
 

@@ -10,9 +10,10 @@
 <% @schedules.each do |schedule| %>
     <tr>
       <td><%= schedule.movie_id %></td>
-      <td><%= schedule.movie.name %></td>
+      <td><%= link_to "#{schedule.movie.name}", admin_schedule_path(schedule.id) %></td>
       <td><%= schedule.start_time %></td>
       <td><%= schedule.end_time %></td>
+      <td><%= link_to '削除', admin_schedule_path(schedule.id), method: :delete %></td>
     </tr>
   <% end %>
 </table>
