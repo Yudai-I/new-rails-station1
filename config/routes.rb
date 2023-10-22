@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get 'schedules/index'
-  get 'schedules/show'
-  get 'schedules/edit'
   resources :sheets
   resources :movies, only:[:index, :show]
 
   namespace :admin do
     resources :movies do
+      resources :schedules
+    end
+
+    resources :schedules
   end
-end
   
 end

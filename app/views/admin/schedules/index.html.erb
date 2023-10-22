@@ -1,0 +1,18 @@
+<h2>全スケジュール一覧<h2/>
+<%= link_to '映画一覧', admin_movies_path %>
+<table>
+<tr>
+<th>ID</th>
+<th>映画名</th>
+<th>開始時間</th>
+<th>終了時間</th>
+</tr>
+<% @schedules.each do |schedule| %>
+    <tr>
+      <td><%= schedule.movie_id %></td>
+      <td><%= schedule.movie.name %></td>
+      <td><%= schedule.start_time %></td>
+      <td><%= schedule.end_time %></td>
+    </tr>
+  <% end %>
+</table>

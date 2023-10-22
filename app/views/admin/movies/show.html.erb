@@ -7,3 +7,4 @@
 <h2>上映中か<%= @movie.is_showing == true ? '上映中' : '上映予定' %></h2><br>
 <h2>作成日時<%= @movie.created_at %></h2><br>
 <h2>更新日時<%= @movie.updated_at %></h2><br>
+<h2><%= link_to 'スケジュール作成',  new_admin_movie_schedule_path(@movie) %></h2>
