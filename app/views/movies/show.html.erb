@@ -12,3 +12,8 @@
 <%= schedule.start_time %>
 <%= schedule.end_time %>
 <% end %>
+<%= form_with url: "/movies/#{@movie.id}/reservation", local: true, method: :get do |f| %>
+<%= f.date_select :date %>
+<%= f.collection_select :schedule_id, @schedules, :id, ->(schedule) { "#{schedule.start_time} - #{schedule.end_time}" } %>
+<%= f.submit '座席を予約する' %>
+<% end %>

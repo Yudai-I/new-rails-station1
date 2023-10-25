@@ -1,9 +1,9 @@
 <%= form_with model: [:admin, @movie, @schedule], local: true do |f| %>
   <%= f.label :start_time %>
-  <%= f.text_field :start_time %>
+  <%= f.time_select :start_time %>
 
   <%= f.label :end_time %>
-  <%= f.text_field :end_time %>
+  <%= f.time_select :end_time %>
 
   <%= f.submit 'スケジュール作成' %>
 <% end %>

@@ -31,10 +31,20 @@ class MoviesController < ApplicationController
     @schedules = @movie.schedules
   end
 
+  def reservation
+    @sheets = Sheet.all
+    @movie = Movie.find(params[:movie_id])
+    @schedule = Schedule.find(params[:schedule_id])
+  end
+
   def destroy
     movie = Movie.find(params[:id])
     movie.destroy
     redirect_to '/movies'
+  end
+
+  def start_time_and_end_time
+    "#{start_time} - #{end_time}"
   end
 
   private
