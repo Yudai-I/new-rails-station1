@@ -25,12 +25,14 @@ ActiveRecord::Schema.define(version: 2023_10_22_065247) do
 
   create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "date", null: false
+    t.integer "movie_id", null: false
     t.integer "schedule_id", null: false
     t.integer "sheet_id", null: false
     t.string "email", null: false
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["date", "schedule_id", "sheet_id"], name: "index_reservations_on_date_and_schedule_id_and_sheet_id", unique: true
   end
 
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

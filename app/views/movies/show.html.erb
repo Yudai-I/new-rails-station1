@@ -8,6 +8,14 @@
 <h2>上映中か<%= @movie.is_showing == true ? '上映中' : '上映予定' %></h2><br>
 <h2>作成日時<%= @movie.created_at %></h2><br>
 <h2>更新日時<%= @movie.updated_at %></h2><br>
+<% @reservations.each do |reservation| %>
+<%= reservation.movie_id %>
+<%= reservation.schedule_id %>
+<%= reservation.sheet_id %>
+<%= reservation.name %>
+<%= reservation.email %>
+<%= reservation.date %>
+<% end %>
 <% @schedules.each do |schedule| %>
 <%= schedule.schedule_date %>
 <%= schedule.start_time.strftime("%H:%M") %>

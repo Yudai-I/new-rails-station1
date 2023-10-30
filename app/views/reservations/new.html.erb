@@ -1,8 +1,9 @@
 <h2>ご予約ページ</h2>
 <%= flash[:error] %>
-<%= form_with model: @reservation, url: movie_schedule_reservations_path, local: true do |f| %>
+<%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
 <h4>選択中の映画</h4>
 <%= @movie.name %>
+<%= f.hidden_field :movie_id, value: @movie.id %>
 <h4>選択中の日時</h4>
 <%= @date %>
 <%= f.hidden_field :date, value: @date %>
@@ -13,8 +14,8 @@
 <%= "#{@schedule.start_time.strftime('%H:%M')}-#{@schedule.end_time.strftime('%H:%M')}" %>
 <%= f.hidden_field :schedule_id, value: @schedule.id %>
 <h4>氏名</h4>
-<%= f.text_area :name %>
+<%= f.text_field :name %>
 <h4>メールアドレス</h4>
-<%= f.text_area :email %>
+<%= f.text_field :email, type: 'email', required: true %>
 <%= f.submit '座席を予約する' %>
 <% end %>

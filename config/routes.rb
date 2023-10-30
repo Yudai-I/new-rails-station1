@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'reservations/new'
+
+  post 'reservations' => 'reservations#create'
   resources :sheets
   resources :movies, only:[:index, :show] do
       resources :schedules do
