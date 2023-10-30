@@ -1,4 +1,7 @@
 <%= form_with model: [:admin, @movie, @schedule], local: true do |f| %>
+  <%= f.label :schedule_date %>
+  <%= f.date_select :schedule_date %>
+
   <%= f.label :start_time %>
   <%= f.time_select :start_time %>
 

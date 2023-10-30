@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2023_10_22_065247) do
 
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "movie_id"
+    t.date "schedule_date"
     t.time "start_time", null: false
     t.time "end_time", null: false
     t.datetime "created_at", precision: 6, null: false

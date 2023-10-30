@@ -32,9 +32,19 @@ class MoviesController < ApplicationController
   end
 
   def reservation
+    # year = params["date(1i)"]
+    # month = params["date(2i)"]
+    # day = params["date(3i)"]
+    # @date = "#{year}-#{month}-#{day}"
+    session[:previous_url] = request.referer
     @sheets = Sheet.all
     @movie = Movie.find(params[:movie_id])
-    @schedule = Schedule.find(params[:schedule_id])
+    @date = params[:date]
+    @schedule = params[:schedule_id]
+
+    if @schedule.blank? or @date.blank?
+      redirect_to movie_path(@movie.id)
+    end
   end
 
   def destroy

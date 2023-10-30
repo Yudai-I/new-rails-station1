@@ -3,6 +3,7 @@
 <tr>
 <th>ID</th>
 <th>映画名</th>
+<th>開始日付</th>
 <th>開始時間</th>
 <th>終了時間</th>
 </tr>
@@ -10,6 +11,7 @@
 <tr>
 <td><%= @schedule.movie_id %></td>
 <td><%= @schedule.movie.name %></td>
+<td><%= @schedule.schedule_date %></td>
 <td><%= @schedule.start_time %></td>
 <td><%= @schedule.end_time %></td>
 <td><%= link_to '戻る', request.referer %></td>
@@ -19,6 +21,7 @@
 <%= form_with model: [:admin, @schedule] do |f| %>
 <table>
 <tr>
+<th>開始日付</th>
 <th>開始時間</th>
 <th>終了時間</th>
 </tr>

@@ -4,6 +4,7 @@
 <tr>
 <th>ID</th>
 <th>映画名</th>
+<th>開始日付</th>
 <th>開始時間</th>
 <th>終了時間</th>
 </tr>
@@ -11,6 +12,7 @@
     <tr>
       <td><%= schedule.movie_id %></td>
       <td><%= link_to "#{schedule.movie.name}", admin_schedule_path(schedule.id) %></td>
+      <td><%= schedule.schedule_date %></td>
       <td><%= schedule.start_time %></td>
       <td><%= schedule.end_time %></td>
       <td><%= link_to '削除', admin_schedule_path(schedule.id), method: :delete %></td>

@@ -1,8 +1,5 @@
-<h1>予約画面</h1>
+<h1><%= "#{@date}の予約画面" %></h1>
 <table>
-  <tr>
-    <th>座席番号</th>
-  </tr>
 
 <%= form_with url: new_movie_schedule_reservation_path(@movie, @schedule), local: true, method: :get do |f| %>
   <% @sheets.each do |sheet| %>
@@ -10,8 +7,12 @@
       <td><%= button_tag sheet.id, name: :sheet_id, value: sheet.id %></td>
     </tr>
   <% end %>
+  <%= hidden_field_tag "date", params[:date] %>
+  <!--
   <%= hidden_field_tag "date(1i)", params["date(1i)"] %>
   <%= hidden_field_tag "date(2i)", params["date(2i)"] %>
   <%= hidden_field_tag "date(3i)", params["date(3i)"] %>
+  -->
 <% end %>
 </table>
+
