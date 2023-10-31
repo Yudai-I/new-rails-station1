@@ -2,8 +2,7 @@
 <%= flash[:error] %>
 <%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
 <h4>選択中の映画</h4>
-<%= @movie.name %>
-<%= f.hidden_field :movie_id, value: @movie.id %>
+<%= @schedule.movie.name %>
 <h4>選択中の日時</h4>
 <%= @date %>
 <%= f.hidden_field :date, value: @date %>

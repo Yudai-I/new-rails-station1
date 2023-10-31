@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2023_10_22_065247) do
 
   create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "date", null: false
-    t.integer "movie_id", null: false
     t.integer "schedule_id", null: false
     t.integer "sheet_id", null: false
     t.string "email", null: false

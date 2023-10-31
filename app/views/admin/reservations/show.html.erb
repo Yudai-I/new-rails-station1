@@ -1,0 +1,19 @@
+<table>
+ <tr>
+  <th>映画タイトル</th>
+  <th>座席</th>
+  <th>日時</th>
+  <th>メールアドレス</th>
+  <th>名前</th>
+ <tr>
+
+ <tr>
+  <td><%= @reservation.schedule.movie.name %></td>
+  <td><%= @reservation.sheet_id %></td>
+  <td><%= @reservation.date %></td>
+  <td><%= @reservation.email %></td>
+  <td><%= @reservation.name %></td>
+  <td><%= link_to "戻る", :back %>
+ </tr>
+
+</table>

@@ -1,0 +1,25 @@
+<h1>予約一覧</h1>
+<%= link_to "予約作成", new_admin_reservation_path %>
+<% flash[:notice] %>
+
+<table>
+<% @reservations.each do |reservation| %>
+ <tr>
+  <th>映画タイトル</th>
+  <th>座席</th>
+  <th>日時</th>
+  <th>メールアドレス</th>
+  <th>名前</th>
+ <tr>
+
+ <tr>
+  <td><%= reservation.schedule.movie.name %></td>
+  <td><%= reservation.sheet_id %></td>
+  <td><%= reservation.date %></td>
+  <td><%= reservation.email %></td>
+  <td><%= reservation.name %></td>
+  <td><%= link_to '詳細', admin_reservation_path(reservation.id) %></td>
+  <td><%= link_to '削除', admin_reservation_path(reservation.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+ </tr>
+ <% end %>
+</table>

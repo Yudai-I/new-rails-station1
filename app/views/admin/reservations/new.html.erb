@@ -1,0 +1,17 @@
+<h2>ご予約ページ</h2>
+<%= flash[:error] %>
+<%= form_with model: @reservation, url: admin_reservations_path, local: true do |f| %>
+<h4>映画の選択</h4>
+<%= f.collection_select :movie_id, @movies, :id, :name %>
+<h4>日時の選択</h4>
+<%= f.collection_select :schedule_id, @schedules, :id, :id %>
+<h4>時刻の選択</h4>
+<%= f.collection_select :date, @schedules, :schedule_date, :schedule_date %>
+<h4>座席の選択</h4>
+<%= f.collection_select :sheet_id, @sheets, :id, :id %>
+<h4>氏名</h4>
+<%= f.text_field :name %>
+<h4>メールアドレス</h4>
+<%= f.text_field :email, type: 'email', required: true %>
+<%= f.submit '座席を予約する' %>
+<% end %>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :movies do
       resources :schedules, only: [:new, :create]
     end
+    resources :reservations, only: [:index, :show, :new, :create, :update, :destroy]
 
     resources :schedules, only: [:index, :show, :edit, :update, :destroy]
   end

@@ -9,7 +9,7 @@
 <h2>作成日時<%= @movie.created_at %></h2><br>
 <h2>更新日時<%= @movie.updated_at %></h2><br>
 <% @reservations.each do |reservation| %>
-<%= reservation.movie_id %>
+<%= reservation.schedule.movie_id %>
 <%= reservation.schedule_id %>
 <%= reservation.sheet_id %>
 <%= reservation.name %>
