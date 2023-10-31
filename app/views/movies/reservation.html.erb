@@ -4,10 +4,16 @@
 
 <%= form_with url: new_movie_schedule_reservation_path(@movie, @schedule), local: true, method: :get do |f| %>
   <% @sheets.each do |sheet| %>
+  <% if Reservation.exists?(sheet_id: sheet.id, date: @date, schedule_id: @schedule) %>
     <tr>
-      <td><%= button_tag sheet.id, name: :sheet_id, value: sheet.id %></td>
+      <td><%= button_tag sheet.id, name: :sheet_id, value: sheet.id, class: "CheckedOut" %></td>
+    </tr>
+  <% else %>
+    <tr>
+        <td><%= button_tag sheet.id, name: :sheet_id, value: sheet.id, class: "NotYet" %></td>
     </tr>
   <% end %>
+<% end %>
   <%= hidden_field_tag "date", params[:date] %>
   <!--
   <%= hidden_field_tag "date(1i)", params["date(1i)"] %>
