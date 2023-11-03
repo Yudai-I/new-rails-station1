@@ -36,11 +36,18 @@ class Admin::ReservationsController < ApplicationController
 
   def update
     reservation = Reservation.find(params[:id])
-    if reservation.update(reservation_params)
-      flash[:notice] = "予約情報の更新に成功しました"
-      redirect_to admin_reservations_path
-    else
-      flash.now[:error] = "予約情報の更新に失敗しました"
+    begin
+      if reservation.update(reservation_params)
+        redirect_to admin_reservations_path
+        flash[:notice] = '予約の更新に成功しました'
+      else
+        flash.now[:error] = 'その座席はすでに予約済みです'
+        @reservation = Reservation.find(params[:id])
+        render :show
+      end
+    rescue ActiveRecord::RecordNotUnique
+      flash.now[:error] = 'その座席はすでに予約済みです'
+      @reservation = Reservation.find(params[:id])
       render :show
     end
   end

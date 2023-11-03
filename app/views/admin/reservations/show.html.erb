@@ -1,19 +1,38 @@
-<table>
- <tr>
-  <th>映画タイトル</th>
-  <th>座席</th>
-  <th>日時</th>
-  <th>メールアドレス</th>
-  <th>名前</th>
- <tr>
+<%= form_with model: [:admin, @reservation], local: true, html: { id: 'date_form' } do |f| %>
+<h4> スケジュールID </h4>
+<%= f.text_field :schedule_id %>
+<h4> 座席ID </h4>
+<%= f.text_field :sheet_id %>
+<h4> 日時 </h4>
+<%= select_year Date.today, prefix: 'temp_date', field_name: 'year', start_year: Date.today.year - 5, end_year: Date.today.year + 5 %>
+<%= select_month Date.today, prefix: 'temp_date', field_name: 'month' %>
+<%= select_day Date.today, prefix: 'temp_date', field_name: 'day' %>
+<%= f.hidden_field :date, id: 'combined_date', name: 'reservation[date]' %>
+<h4> メールアドレス </h4>
+<%= f.text_field :email %>
+<h4> 名前 </h4>
+<%= f.text_field :name %>
+<%= f.submit '更新' %>
+<%= link_to "戻る", :back %>
+<% end %>
 
- <tr>
-  <td><%= @reservation.schedule.movie.name %></td>
-  <td><%= @reservation.sheet_id %></td>
-  <td><%= @reservation.date %></td>
-  <td><%= @reservation.email %></td>
-  <td><%= @reservation.name %></td>
-  <td><%= link_to "戻る", :back %>
- </tr>
 
-</table>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('date_form');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // デフォルトのフォーム送信を防ぐ
+
+    const year = document.getElementsByName('temp_date[year]')[0].value;
+    const month = document.getElementsByName('temp_date[month]')[0].value;
+    const day = document.getElementsByName('temp_date[day]')[0].value;
+    const combinedDate = `${year}-${month}-${day}`;
+    document.getElementById('combined_date').value = combinedDate;
+
+    // 非同期処理や他の処理がない限り、直ちにフォームを送信する
+    form.submit();
+  });
+});
+</script>
+

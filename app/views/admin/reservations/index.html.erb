@@ -1,6 +1,6 @@
 <h1>予約一覧</h1>
 <%= link_to "予約作成", new_admin_reservation_path %>
-<% flash[:notice] %>
+<%= flash[:notice] %>
 
 <table>
 <% @reservations.each do |reservation| %>
