@@ -1,4 +1,6 @@
 class Admin::ReservationsController < ApplicationController
+  before_action :set_cache_headers
+
   def index
     @reservations = Reservation.all
   end
@@ -19,10 +21,15 @@ class Admin::ReservationsController < ApplicationController
 
     begin
       if reservation.save
+        flash[:notice] = '予約の作成に成功しました'
         redirect_to admin_reservations_path
       else
-        flash[:error] = 'その座席の予約に問題があります'
-        redirect_to admin_reservations_path
+        flash.now[:error] = 'その座席はすでに予約済みです'
+        @reservation = Reservation.new
+        @movies = Movie.all
+        @schedules = Schedule.all
+        @sheets = Sheet.all
+        render :new
       end
     rescue ActiveRecord::RecordNotUnique
       flash.now[:error] = 'その座席はすでに予約済みです'

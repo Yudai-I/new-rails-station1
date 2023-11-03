@@ -1,7 +1,7 @@
 <h2>ご予約ページ</h2>
 <%= link_to movies_path %>
-<%= flash[:error] %>
-<%= form_with model: @reservation, url: admin_reservations_path, local: true, html: { id: 'date_form' } do |f| %>
+<%= flash[:notice] %>
+<%= form_with model: [:admin, @reservation], url: admin_reservations_path, local: true, html: { id: 'date_form' } do |f| %>
 <h4>映画の選択</h4>
 <%= f.collection_select :movie_id, @movies, :id, :name %>
 <h4>日時の選択</h4>
