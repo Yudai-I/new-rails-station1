@@ -1,5 +1,4 @@
 class Admin::ReservationsController < ApplicationController
-  before_action :set_cache_headers
 
   def index
     @reservations = Reservation.all
