@@ -11,24 +11,24 @@ class Admin::ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     @movies = Movie.all
-    @schedules = Schedule.all
+    @schedules = Schedule.includes(:movie).all
     @sheets = Sheet.all
   end
 
   def create
-    reservation = Reservation.new(reservation_params)
+    @reservation = Reservation.new(reservation_params)
 
     begin
-      if reservation.save
+      if @reservation.save
         flash[:notice] = '予約の作成に成功しました'
         redirect_to admin_reservations_path
       else
-        flash.now[:error] = 'その座席はすでに予約済みです'
-        @reservation = Reservation.new
+        Rails.logger.info(@reservation.errors.full_messages) # この行を修正しました
+        flash.now[:error] = @reservation.errors.full_messages.to_sentence
         @movies = Movie.all
-        @schedules = Schedule.all
+        @schedules = Schedule.includes(:movie).all
         @sheets = Sheet.all
-        render :new
+        render :new, status: :bad_request
       end
     rescue ActiveRecord::RecordNotUnique
       flash.now[:error] = 'その座席はすでに予約済みです'

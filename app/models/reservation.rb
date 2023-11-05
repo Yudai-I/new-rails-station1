@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
     belongs_to :schedule
     belongs_to :sheet
-    delegate :movie, to: :schedules
+    delegate :movie, to: :schedule
 
     validates :name, presence: true, length: { maximum: 50 }
     validates :email, presence: true, length: { maximum: 255 },

@@ -2,8 +2,6 @@
 <%= link_to movies_path %>
 <%= flash[:notice] %>
 <%= form_with model: [:admin, @reservation], url: admin_reservations_path, local: true do |f| %>
-<h4>映画の選択</h4>
-<%= f.collection_select :movie_id, @movies, :id, :name %>
 <h4>日時の選択</h4>
 <%= f.date_select(
         :date,
@@ -11,7 +9,10 @@
         end_year: Date.today.year + 18,
         default: Date.today) %>
 <h4>時刻の選択</h4>
-<%= f.collection_select :schedule_id, @schedules, :id, ->(schedule) { "#{schedule.start_time.strftime("%H:%M")} - #{schedule.end_time.strftime("%H:%M")}" } %>
+<%= f.select :schedule_id, options_from_collection_for_select(@schedules, 'id', lambda { |schedule| 
+  "#{schedule.movie.name} #{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}"
+}) %>
+
 <h4>座席の選択</h4>
 <%= f.collection_select :sheet_id, @sheets, :id, :id %>
 <h4>氏名</h4>
