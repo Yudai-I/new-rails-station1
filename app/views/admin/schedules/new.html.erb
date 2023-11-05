@@ -8,5 +8,8 @@
   <%= f.label :end_time %>
   <%= f.time_select :end_time %>
 
+  <%= f.label :screen_id %>
+  <%= f.collection_select :screen_id, Screen.all, :id, :screen_number %>
+
   <%= f.submit 'スケジュール作成' %>
 <% end %>
