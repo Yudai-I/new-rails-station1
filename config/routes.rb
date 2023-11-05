@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   post 'reservations' => 'reservations#create'
   resources :sheets
   resources :movies, only:[:index, :show] do
