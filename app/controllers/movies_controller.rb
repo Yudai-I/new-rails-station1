@@ -4,26 +4,24 @@ class MoviesController < ApplicationController
     keyword = params[:name]
     show = params[:is_showing]
 
-    if show == "" && keyword == ""
-  		@movies = Movie.all
-  	end
-    
-  	# @rangeは全てか上映中か上映予定か絞ったMovie配列
-  	if  show == "1"
-  		@range = Movie.where(is_showing: true)
-  	elsif show == "0"
-  		@range = Movie.where(is_showing: false)
-  	else
-  		@range = Movie.all
-  	end
+    @movies = Movie.all if show == '' && keyword == ''
+
+    # @rangeは全てか上映中か上映予定か絞ったMovie配列
+    @range = if show == '1'
+               Movie.where(is_showing: true)
+             elsif show == '0'
+               Movie.where(is_showing: false)
+             else
+               Movie.all
+             end
 
     # @rangeをさらに絞り込む
-  	if keyword.blank?
-  		@movies = @range
-  	else
-  		@movies = @range.merge(Movie.where('name LIKE ?', "%#{keyword}%").or(Movie.where('description LIKE ?', "%#{keyword}%")))
-  	end
-  
+    if keyword.blank?
+      @movies = @range
+    else
+      @movies = @range.merge(Movie.where('name LIKE ?',
+                                         "%#{keyword}%").or(Movie.where('description LIKE ?', "%#{keyword}%")))
+    end
   end
 
   def show
@@ -43,9 +41,9 @@ class MoviesController < ApplicationController
     @date = params[:date]
     @schedule = params[:schedule_id]
 
-    if @schedule.blank? or @date.blank?
-      redirect_to movie_path(@movie.id)
-    end
+    return unless @schedule.blank? or @date.blank?
+
+    redirect_to movie_path(@movie.id)
   end
 
   def destroy
@@ -59,7 +57,7 @@ class MoviesController < ApplicationController
   end
 
   private
-  
+
   def movie_params
     params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
   end

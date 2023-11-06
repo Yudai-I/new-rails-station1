@@ -5,7 +5,7 @@ RSpec.describe Reservation, type: :model do
     let(:schedule) { create(:schedule, movie_id: create(:movie).id) }
     let(:reservation) { build(:reservation, { sheet_id: create(:sheet).id, schedule_id: schedule.id }) }
 
-    example "メールアドレスの形式のバリデーションができていること" do
+    example 'メールアドレスの形式のバリデーションができていること' do
       reservation.email = 'techbowl@example.com'
       expect(reservation).to be_valid
 

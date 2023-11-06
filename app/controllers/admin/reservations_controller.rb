@@ -1,5 +1,4 @@
 class Admin::ReservationsController < ApplicationController
-
   def index
     @reservations = Reservation.all
   end
@@ -61,15 +60,16 @@ class Admin::ReservationsController < ApplicationController
   def destroy
     reservation = Reservation.find(params[:id])
     if reservation.destroy
-      flash[:notice] = "予約情報の削除に成功しました"
+      flash[:notice] = '予約情報の削除に成功しました'
       redirect_to admin_reservations_path
     else
-      flash.now[:error] = "予約情報の削除に失敗しました"
+      flash.now[:error] = '予約情報の削除に失敗しました'
       render :show
     end
   end
 
   private
+
   def reservation_params
     params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id)
   end

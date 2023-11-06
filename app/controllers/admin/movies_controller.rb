@@ -36,23 +36,22 @@ class Admin::MoviesController < ApplicationController
       render :edit
     end
   end
- 
+
   def destroy
     movie = Movie.find(params[:id])
     if movie.destroy
-      flash[:notice] = "削除に成功しました"
+      flash[:notice] = '削除に成功しました'
       redirect_to '/admin/movies'
     else
-      flash[:notice] = "削除に失敗しました"
+      flash[:notice] = '削除に失敗しました'
       @movies = Movie.all
       render :index
     end
   end
-  
+
   private
-  
+
   def movie_params
     params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
   end
-
 end

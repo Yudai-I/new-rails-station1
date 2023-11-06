@@ -10,10 +10,9 @@ class ReservationsController < ApplicationController
       return
     end
 
-    unless @sheet && @date
-      redirect_to movie_path(@movie.id)
-    end
-    
+    return if @sheet && @date
+
+    redirect_to movie_path(@movie.id)
   end
 
   def create
@@ -24,15 +23,18 @@ class ReservationsController < ApplicationController
         redirect_to movie_path(reservation.schedule.movie.id)
       else
         flash.now[:error] = 'その座席の予約に問題があります'
-        redirect_to movie_reservation_path(reservation.schedule.movie.id, date: reservation.date, schedule_id: reservation.schedule_id)
+        redirect_to movie_reservation_path(reservation.schedule.movie.id, date: reservation.date,
+                                                                          schedule_id: reservation.schedule_id)
       end
     rescue ActiveRecord::RecordNotUnique
       flash[:error] = 'その座席はすでに予約済みです'
-      redirect_to movie_reservation_path(reservation.schedule.movie.id, date: reservation.date, schedule_id: reservation.schedule_id)
+      redirect_to movie_reservation_path(reservation.schedule.movie.id, date: reservation.date,
+                                                                        schedule_id: reservation.schedule_id)
     end
   end
 
   private
+
   def reservation_params
     params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id)
   end

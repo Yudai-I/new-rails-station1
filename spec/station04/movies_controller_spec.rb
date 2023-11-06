@@ -7,7 +7,7 @@ RSpec.describe Admin::MoviesController, type: :controller do
   end
 
   describe 'Station4 GET /admin/movies/:id/edit' do
-    before { get 'edit', params: {id: @movie.id} }
+    before { get 'edit', params: { id: @movie.id } }
 
     it '200を返すこと' do
       expect(response).to have_http_status(200)
@@ -27,7 +27,7 @@ RSpec.describe Admin::MoviesController, type: :controller do
   end
 
   describe 'Station4 PUT /admin/movies/:id' do
-    let(:movie_update_attributes) { { name: "TEST" } }
+    let(:movie_update_attributes) { { name: 'TEST' } }
 
     it '302を返すこと' do
       put :update, params: { id: @movie.id, movie: movie_update_attributes }, session: {}
@@ -36,8 +36,8 @@ RSpec.describe Admin::MoviesController, type: :controller do
 
     it 'エラー処理がされていて仮にRailsデフォルトのエラー画面が出ないこと' do
       # nameの一意は条件に入っているため、わざと重複させてバリデーションエラーを起こす
-      create(:movie, name: "重複する名前")
-      put :update, params: { id: @movie.id, movie: { name: "重複する名前" } }, session: {}
+      create(:movie, name: '重複する名前')
+      put :update, params: { id: @movie.id, movie: { name: '重複する名前' } }, session: {}
 
       expect(response.body).not_to include('<div class="source hidden" id="frame-source-0-0">') # Railsのデフォルトのエラー画面のHTML要素
     end

@@ -34,8 +34,8 @@ RSpec.describe Admin::MoviesController, type: :controller do
 
     it 'エラー処理がされていて仮にRailsデフォルトのエラー画面が出ないこと' do
       # nameの一意は条件に入っているため、わざと重複させてバリデーションエラーを起こす
-      create(:movie, name: "重複する名前")
-      post :create, params: { movie: { name: "重複する名前", is_showing: true ,image_url: "https://techbowl.co.jp/_nuxt/img/test.png" } }, session: {}
+      create(:movie, name: '重複する名前')
+      post :create, params: { movie: { name: '重複する名前', is_showing: true, image_url: 'https://techbowl.co.jp/_nuxt/img/test.png' } }, session: {}
 
       expect(response.body).not_to include('<div class="source hidden" id="frame-source-0-0">') # Railsのデフォルトのエラー画面のHTML要素
     end

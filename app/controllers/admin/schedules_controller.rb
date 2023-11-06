@@ -1,5 +1,4 @@
 class Admin::SchedulesController < ApplicationController
- 
   def index
     @schedules = Schedule.all
   end
@@ -20,8 +19,7 @@ class Admin::SchedulesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def new
     @schedule = Schedule.new
@@ -33,22 +31,22 @@ class Admin::SchedulesController < ApplicationController
     schedule.update(schedule_params)
     redirect_to admin_schedules_path(schedule.id)
   end
-  
+
   def destroy
     schedule = Schedule.find(params[:id])
     if schedule.destroy
-      flash[:notice] = "削除に成功しました"
+      flash[:notice] = '削除に成功しました'
       redirect_to admin_schedules_path
     else
-      flash[:notice] = "削除に失敗しました"
+      flash[:notice] = '削除に失敗しました'
       @schedules = Schedule.all
       render :index
     end
   end
 
   private
+
   def schedule_params
     params.require(:schedule).permit(:schedule_date, :start_time, :end_time, :movie_id, :screen_id)
   end
-
 end

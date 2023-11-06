@@ -6,12 +6,19 @@ RSpec.describe MoviesController, type: :controller do
     let!(:sheets) { create_list(:sheet, 15) }
     let!(:movie) { create(:movie) }
     let!(:schedule) { create(:schedule, movie_id: movie.id) }
-    let(:success_request) { get :reservation, params: { id: movie.id, movie_id: movie.id, schedule_id: schedule.id, date: "2021-12-21 14:53:56" }, session: {} }
-    let(:no_date_request) { get :reservation, params: { id: movie.id, movie_id: movie.id, schedule_id: schedule.id }, session: {} }
-    let(:no_schedule_request) { get :reservation, params: { id: movie.id, movie_id: movie.id, date: "2021-12-21 14:53:56" }, session: {} }
+    let(:success_request) do
+      get :reservation, params: { id: movie.id, movie_id: movie.id, schedule_id: schedule.id, date: '2021-12-21 14:53:56' },
+                        session: {}
+    end
+    let(:no_date_request) do
+      get :reservation, params: { id: movie.id, movie_id: movie.id, schedule_id: schedule.id }, session: {}
+    end
+    let(:no_schedule_request) do
+      get :reservation, params: { id: movie.id, movie_id: movie.id, date: '2021-12-21 14:53:56' }, session: {}
+    end
     let(:no_date_and_sheet_request) { get :reservation, params: { id: movie.id, movie_id: movie.id }, session: {} }
 
-    context "クエリについて" do
+    context 'クエリについて' do
       it 'schedule_idとdateが渡されていれば200を返すこと' do
         success_request
         expect(response).to have_http_status(200)
