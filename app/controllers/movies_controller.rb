@@ -1,27 +1,7 @@
 class MoviesController < ApplicationController
   def index
     @movie = Movie.new
-    keyword = params[:name]
-    show = params[:is_showing]
-
-    @movies = Movie.all if show == '' && keyword == ''
-
-    # @rangeは全てか上映中か上映予定か絞ったMovie配列
-    @range = if show == '1'
-               Movie.where(is_showing: true)
-             elsif show == '0'
-               Movie.where(is_showing: false)
-             else
-               Movie.all
-             end
-
-    # @rangeをさらに絞り込む
-    if keyword.blank?
-      @movies = @range
-    else
-      @movies = @range.merge(Movie.where('name LIKE ?',
-                                         "%#{keyword}%").or(Movie.where('description LIKE ?', "%#{keyword}%")))
-    end
+    @movies = filter_movies(params[:name], params[:is_showing])
   end
 
   def show
@@ -36,14 +16,12 @@ class MoviesController < ApplicationController
     # day = params["date(3i)"]
     # @date = "#{year}-#{month}-#{day}"
     session[:previous_url] = request.referer
-    @sheets = Sheet.all
     @movie = Movie.find(params[:movie_id])
+    @sheets = Sheet.all
     @date = params[:date]
     @schedule = params[:schedule_id]
 
-    return unless @schedule.blank? or @date.blank?
-
-    redirect_to movie_path(@movie.id)
+    handle_empty_reservation(@movie.id, @date, @schedule)
   end
 
   def destroy
@@ -57,6 +35,25 @@ class MoviesController < ApplicationController
   end
 
   private
+
+  def filter_movies(keyword, show)
+    range = case show
+            when '1' then Movie.where(is_showing: true)
+            when '0' then Movie.where(is_showing: false)
+            else Movie.all
+            end
+
+    return range if keyword.blank?
+
+    range.where('name LIKE ? OR description LIKE ?', "%#{keyword}%", "%#{keyword}%")
+  end
+
+  def handle_empty_reservation(movie_id, date, schedule)
+    return if schedule.present? && date.present?
+
+    flash[:alert] = '日付とスケジュールを選択してください。'
+    redirect_to movie_path(movie_id)
+  end
 
   def movie_params
     params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
