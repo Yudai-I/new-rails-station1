@@ -5,10 +5,9 @@ class ApplicationController < ActionController::Base
     movies_path
   end
 
-  # 以下のメソッドをオーバーライドして、ステータスコード302を強制する
-  def respond_with(resource, _opts = {})
-    redirect_to after_sign_up_path_for(resource), status: :found
-  end
+  # def respond_with(resource, _opts = {})
+  #   redirect_to after_sign_up_path_for(resource), status: :found
+  # end
 
   protected
 
