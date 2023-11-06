@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users, path_names: {
+    sign_up: 'new'
+  }
 
-  devise_for :users
   post 'reservations' => 'reservations#create'
   resources :sheets
   resources :movies, only:[:index, :show] do
