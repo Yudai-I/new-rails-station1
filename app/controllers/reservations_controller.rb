@@ -16,26 +16,37 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.new(reservation_params)
-
-    begin
-      if reservation.save
-        redirect_to movie_path(reservation.schedule.movie.id)
-      else
-        flash.now[:error] = 'その座席の予約に問題があります'
-        redirect_to movie_reservation_path(reservation.schedule.movie.id, date: reservation.date,
-                                                                          schedule_id: reservation.schedule_id)
-      end
-    rescue ActiveRecord::RecordNotUnique
-      flash[:error] = 'その座席はすでに予約済みです'
-      redirect_to movie_reservation_path(reservation.schedule.movie.id, date: reservation.date,
-                                                                        schedule_id: reservation.schedule_id)
+    @reservation = Reservation.new(reservation_params)
+    if @reservation.save
+      handle_successful_reservation
+    else
+      handle_failed_reservation
     end
+  rescue ActiveRecord::RecordNotUnique
+    handle_unique_violation
   end
 
   private
 
   def reservation_params
     params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id)
+  end
+
+  def handle_successful_reservation
+    redirect_to movie_path(@reservation.schedule.movie.id), notice: '予約が正常に作成されました。'
+  end
+
+  def handle_failed_reservation
+    flash.now[:error] = 'その座席の予約に問題があります'
+    redirect_to new_reservation_path(movie_id: @reservation.schedule.movie.id,
+                                     date: @reservation.date,
+                                     schedule_id: @reservation.schedule_id)
+  end
+
+  def handle_unique_violation
+    flash[:error] = 'その座席はすでに予約済みです'
+    redirect_to new_reservation_path(movie_id: @reservation.schedule.movie.id,
+                                     date: @reservation.date,
+                                     schedule_id: @reservation.schedule_id)
   end
 end
