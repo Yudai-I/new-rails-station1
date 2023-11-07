@@ -19,3 +19,27 @@ Metrics/PerceivedComplexity:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/IfUnlessModifier:
+  Exclude:
+    - 'bin/bundle'
+
+Style/InverseMethods:
+  Exclude:
+    - 'bin/yarn'
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - 'config/puma.rb'
+
+Style/RedundantInterpolation:
+  Exclude:
+    - 'spec/station07/sheets_controller_spec.rb'
+
+Style/SpecialGlobalVars:
+  EnforcedStyle: use_perl_names
+  Exclude:
+    - '**/*'
+  
+Layout/LineLength:
+  Enabled: false
+
