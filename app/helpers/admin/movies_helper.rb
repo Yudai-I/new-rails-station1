@@ -1,2 +1,4 @@
-module Admin::MoviesHelper
+module Admin
+  module MoviesHelper
+  end
 end

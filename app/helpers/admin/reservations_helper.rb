@@ -1,2 +1,4 @@
-module Admin::ReservationsHelper
+module Admin
+  module ReservationsHelper
+  end
 end

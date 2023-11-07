@@ -1,1 +1,18 @@
 inherit_from: .rubocop_todo.yml
+
+#deviseの必須設定によるもの
+Metrics/MethodLength:
+  Enabled: false
+
+#spec関連のファイルの指摘
+Metrics/BlockLength:
+  Enabled: false
+
+#bin/bundleへの指摘
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+#bin/bundleへの指摘
+Metrics/PerceivedComplexity:
+  Enabled: false
+
