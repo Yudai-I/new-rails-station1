@@ -1,3 +1,4 @@
+# 全コントローラー共通の設定
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -11,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # deviseの設定でnameをパラメータとして許可
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end

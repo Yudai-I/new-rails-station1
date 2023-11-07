@@ -10,10 +10,7 @@
 
 
 
-# Offense count: 30
-# Configuration parameters: AllowedConstants.
-Style/Documentation:
-  Enabled: false
+
 
 # Offense count: 94
 # This cop supports unsafe autocorrection (--autocorrect-all).

@@ -1,4 +1,5 @@
 module Admin
+  # 管理者用の映画のスケジュールコントローラ
   class SchedulesController < ApplicationController
     def index
       @schedules = Schedule.all

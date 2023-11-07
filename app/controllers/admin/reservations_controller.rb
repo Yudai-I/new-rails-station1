@@ -1,4 +1,5 @@
 module Admin
+  # 管理者用の映画の予約情報管理コントローラ
   class ReservationsController < ApplicationController
     before_action :set_reservation, only: %i[show update destroy]
     before_action :load_movies_and_schedules_and_sheets, only: %i[new create]

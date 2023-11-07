@@ -1,4 +1,5 @@
 module Admin
+  # 管理者用の映画コントローラー
   class MoviesController < ApplicationController
     def index
       @movies = Movie.all

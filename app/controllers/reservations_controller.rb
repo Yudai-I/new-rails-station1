@@ -1,3 +1,4 @@
+# 顧客用の予約情報コントローラ
 class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new

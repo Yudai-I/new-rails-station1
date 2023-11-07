@@ -1,3 +1,4 @@
+# 顧客用の映画コントローラ
 class MoviesController < ApplicationController
   def index
     @movie = Movie.new
