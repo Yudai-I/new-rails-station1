@@ -1,4 +1,6 @@
 <%= form_with model: [:admin, @reservation], url: admin_reservation_path, local: true do |f| %>
+<h4>映画館名</h4>
+<%= f.text_field :theater_id %>
 <h4> スケジュールID </h4>
 <%= f.text_field :schedule_id %>
 <h4> 座席ID </h4>

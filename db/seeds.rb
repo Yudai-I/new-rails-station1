@@ -20,3 +20,7 @@ Sheet.create(column: 2, row: 'c')
 Sheet.create(column: 3, row: 'c')
 Sheet.create(column: 4, row: 'c')
 Sheet.create(column: 5, row: 'c')
+
+Theater.create(name: '1th theater')
+Theater.create(name: '2th theater')
+Theater.create(name: '3th theater')

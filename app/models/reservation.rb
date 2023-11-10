@@ -21,5 +21,5 @@ class Reservation < ApplicationRecord
   validates :schedule_id, presence: true
   validates :sheet_id, presence: true
   validates_uniqueness_of :sheet_id, scope: %i[schedule_id date],
-                                     message: '指定された日時とスケジュールで既に予約が存在します。'
+                                     message: '指定された日時、スケジュールで既に予約が存在します。'
 end

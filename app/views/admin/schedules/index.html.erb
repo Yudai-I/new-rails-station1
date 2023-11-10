@@ -7,6 +7,8 @@
 <th>開始日付</th>
 <th>開始時間</th>
 <th>終了時間</th>
+<th>スクリーン番号</th>
+<th>映画館名</th>
 </tr>
 <% @schedules.each do |schedule| %>
     <tr>
@@ -15,6 +17,8 @@
       <td><%= schedule.schedule_date %></td>
       <td><%= schedule.start_time %></td>
       <td><%= schedule.end_time %></td>
+      <td><%= schedule.screen_id %></td>
+      <td><%= schedule.theater.name %></td>
       <td><%= link_to '削除', admin_schedule_path(schedule.id), method: :delete %></td>
     </tr>
   <% end %>

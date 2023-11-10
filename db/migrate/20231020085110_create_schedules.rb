@@ -12,6 +12,8 @@
 class CreateSchedules < ActiveRecord::Migration[6.1]
   def change
     create_table :schedules do |t|
+      drop_table :schedules
+
       t.integer :movie_id                    # 映画の外部キーID
       t.date :schedule_date, null: false     # 上映日
       t.time :start_time, null: false        # 上映開始時刻
@@ -20,5 +22,6 @@ class CreateSchedules < ActiveRecord::Migration[6.1]
     end
     # `screen`を外部キーとして追加
     add_reference :schedules, :screen, null: false, foreign_key: true
+    add_reference :schedules, :theater, null: false, foreign_key: true
   end
 end

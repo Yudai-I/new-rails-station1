@@ -9,7 +9,10 @@
   <%= f.time_select :end_time %>
 
   <%= f.label :screen_id %>
-  <%= f.collection_select :screen_id, Screen.all, :id, :screen_number %>
+  <%= f.select :screen_id, options_for_select(1..3) %>
+
+  <%= f.label :theater_id %>
+  <%= f.collection_select :theater_id, Theater.all, :id, :name %>
 
   <%= f.submit 'スケジュール作成' %>
 <% end %>

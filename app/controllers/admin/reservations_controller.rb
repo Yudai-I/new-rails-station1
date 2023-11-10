@@ -17,6 +17,7 @@ module Admin
       @movies = Movie.all
       @schedules = Schedule.includes(:movie).all
       @sheets = Sheet.all
+      @theaters = Theater.all
     end
 
     def create
@@ -96,7 +97,7 @@ module Admin
     end
 
     def reservation_params
-      params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id)
+      params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id, :theater_id)
     end
   end
 end

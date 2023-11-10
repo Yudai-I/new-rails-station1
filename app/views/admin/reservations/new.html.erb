@@ -2,6 +2,8 @@
 <%= link_to movies_path %>
 <%= flash[:notice] %>
 <%= form_with model: [:admin, @reservation], url: admin_reservations_path, local: true do |f| %>
+<h4>劇場の選択</h4>
+<%= f.collection_select :theater_id, @theaters, :id, :name %>
 <h4>日時の選択</h4>
 <%= f.date_select(
         :date,

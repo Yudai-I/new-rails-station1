@@ -4,4 +4,8 @@
 class Screen < ApplicationRecord
   # Scheduleモデルへの関連付けで、スクリーンが削除された際に関連するスケジュールも削除される
   has_many :schedules, dependent: :destroy
+  belongs_to :theater
+
+  # スクリーン番号が劇場内でユニークであることを検証
+  validates :screen_number, presence: true, uniqueness: { scope: :theater_id }
 end
