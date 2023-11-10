@@ -8,14 +8,9 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @schedules = @movie.schedules
-    @reservations = Reservation.all
   end
 
   def reservation
-    # year = params["date(1i)"]
-    # month = params["date(2i)"]
-    # day = params["date(3i)"]
-    # @date = "#{year}-#{month}-#{day}"
     session[:previous_url] = request.referer
     @movie = Movie.find(params[:movie_id])
     @sheets = Sheet.all

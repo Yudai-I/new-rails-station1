@@ -12,8 +12,6 @@
 class CreateSchedules < ActiveRecord::Migration[6.1]
   def change
     create_table :schedules do |t|
-      drop_table :schedules
-
       t.integer :movie_id                    # 映画の外部キーID
       t.date :schedule_date, null: false     # 上映日
       t.time :start_time, null: false        # 上映開始時刻
