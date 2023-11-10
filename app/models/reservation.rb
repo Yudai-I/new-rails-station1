@@ -17,9 +17,8 @@ class Reservation < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
   # 予約日、スケジュールID、座席IDの組み合わせがユニークであることを検証
-  validates :date, presence: true
   validates :schedule_id, presence: true
   validates :sheet_id, presence: true
-  validates_uniqueness_of :sheet_id, scope: %i[schedule_id date],
-                                     message: '指定された日時、スケジュールで既に予約が存在します。'
+  validates_uniqueness_of :sheet_id, scope: %i[schedule_id],
+                                     message: '指定されたスケジュールで既に予約が存在します。'
 end

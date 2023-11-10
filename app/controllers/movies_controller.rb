@@ -7,17 +7,17 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    @schedules = @movie.schedules
+    @theaters = Theater.all
+    @schedules = filter_schedules(params[:theater_id])
   end
 
   def reservation
     session[:previous_url] = request.referer
     @movie = Movie.find(params[:movie_id])
     @sheets = Sheet.all
-    @date = params[:date]
     @schedule = params[:schedule_id]
 
-    handle_empty_reservation(@movie.id, @date, @schedule)
+    handle_empty_reservation(@movie.id, @schedule)
   end
 
   def destroy
@@ -44,8 +44,13 @@ class MoviesController < ApplicationController
     range.where('name LIKE ? OR description LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
 
-  def handle_empty_reservation(movie_id, date, schedule)
-    return if schedule.present? && date.present?
+  def filter_schedules(id)
+    range = Schedule.all
+    return range.where(theater_id: id)
+  end
+
+  def handle_empty_reservation(movie_id, schedule)
+    return if schedule.present?
 
     flash[:alert] = '日付とスケジュールを選択してください。'
     redirect_to movie_path(movie_id)

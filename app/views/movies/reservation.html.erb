@@ -4,9 +4,9 @@
 
 <%= form_with url: new_movie_schedule_reservation_path(@movie, @schedule), local: true, method: :get do |f| %>
   <% @sheets.each do |sheet| %>
-  <% if Reservation.exists?(sheet_id: sheet.id, date: @date, schedule_id: @schedule) %>
+  <% if Reservation.exists?(sheet_id: sheet.id, schedule_id: @schedule) %>
     <tr>
-      <td><%= button_tag sheet.id, name: :sheet_id, value: sheet.id, class: "CheckedOut" %></td>
+      <td><%= button_tag sheet.id, name: :sheet_id, value: sheet.id, class: "CheckedOut", disabled: true %></td>
     </tr>
   <% else %>
     <tr>
@@ -14,12 +14,7 @@
     </tr>
   <% end %>
 <% end %>
-  <%= hidden_field_tag "date", params[:date] %>
-  <!--
-  <%= hidden_field_tag "date(1i)", params["date(1i)"] %>
-  <%= hidden_field_tag "date(2i)", params["date(2i)"] %>
-  <%= hidden_field_tag "date(3i)", params["date(3i)"] %>
-  -->
+
 <% end %>
 </table>
 

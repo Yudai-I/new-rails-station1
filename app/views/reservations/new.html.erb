@@ -1,17 +1,18 @@
 <h2>ご予約ページ</h2>
 <%= flash[:error] %>
 <%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
+<h4>選択中の劇場</h4>
+<%= @schedule.theater.name %>
 <h4>選択中の映画</h4>
 <%= @schedule.movie.name %>
-<h4>選択中の日時</h4>
-<%= @date %>
-<%= f.hidden_field :date, value: @date %>
+<h4>選択中の日付</h4>
+<%= @schedule.schedule_date %>
+<h4>選択中の時刻</h4>
+<%= "#{@schedule.start_time.strftime('%H:%M')}-#{@schedule.end_time.strftime('%H:%M')}" %>
+<%= f.hidden_field :schedule_id, value: @schedule.id %>
 <h4>選択中の座席</h4>
 <%= @sheet %>
 <%= f.hidden_field :sheet_id, value: @sheet %>
-<h4>選択中のスケジュール</h4>
-<%= "#{@schedule.start_time.strftime('%H:%M')}-#{@schedule.end_time.strftime('%H:%M')}" %>
-<%= f.hidden_field :schedule_id, value: @schedule.id %>
 <h4>氏名</h4>
 <%= f.text_field :name %>
 <h4>メールアドレス</h4>

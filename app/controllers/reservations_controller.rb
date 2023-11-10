@@ -4,14 +4,13 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
     @schedule = Schedule.find_by(id: params[:schedule_id])
     @sheet = params[:sheet_id]
-    @date = params[:date]
 
     unless @schedule
       head :not_found # 404 Not Found を返す
       return
     end
 
-    return if @sheet && @date
+    return if @sheet
 
     redirect_to movie_path(@movie.id)
   end
@@ -30,24 +29,23 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id)
+    params.require(:reservation).permit(:name, :email, :schedule_id, :sheet_id)
   end
 
   def handle_successful_reservation
-    redirect_to movie_path(@reservation.schedule.movie.id), notice: '予約が正常に作成されました。'
+    flash[:notice] = "映画の予約に成功しました"
+    redirect_to movie_path(@reservation.schedule.movie.id)
   end
 
   def handle_failed_reservation
-    flash.now[:error] = 'その座席の予約に問題があります'
-    redirect_to new_reservation_path(movie_id: @reservation.schedule.movie.id,
-                                     date: @reservation.date,
+    redirect_to movie_reservation_path(@reservation.schedule.movie.id,
                                      schedule_id: @reservation.schedule_id)
+    flash[:error] = 'その座席はすでに予約済みです'
   end
 
   def handle_unique_violation
     flash[:error] = 'その座席はすでに予約済みです'
     redirect_to new_reservation_path(movie_id: @reservation.schedule.movie.id,
-                                     date: @reservation.date,
                                      schedule_id: @reservation.schedule_id)
   end
 end

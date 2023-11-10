@@ -18,13 +18,14 @@
 </tr>
 </table>
 
+<h2>ス<%="#{@movie.name}" %>の スケジュール一覧</h2>
 <table>
 <% @schedules.each do |schedule| %>
     <tr>
       <td><%= schedule.movie_id %></td>
       <td><%= link_to "#{schedule.movie.name}", admin_schedule_path(schedule.id) %></td>
-      <td><%= schedule.start_time %></td>
-      <td><%= schedule.end_time %></td>
+      <td><%= schedule.schedule_date %></td>
+      <td><%= schedule.start_time.strftime('%H:%M') + "～" + schedule.end_time.strftime('%H:%M') %></td>
       <td><%= link_to "スケジュール詳細", admin_schedule_path(@movie.id) %></td>
       <td><%= link_to 'スケジュール削除', admin_schedule_path(schedule.id), method: :delete %></td>
     </tr>

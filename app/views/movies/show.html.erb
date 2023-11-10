@@ -1,11 +1,18 @@
 <h1>作品詳細</h1>
-<%= link_to "戻る", :back %>
+<%= flash[:notice] %>
+<%= flash[:error] %>
+<%= link_to "映画一覧へ", movies_path %>
 
 <h2>作品名<%= @movie.name %></h2><br>
 <h2>公開年<%= @movie.year %></h2><br>
 <h2>概要<%= @movie.description %></h2><br>
 <h2>画像<%= image_tag @movie.image_url %></h2><br>
 <h2>上映中か<%= @movie.is_showing == true ? '上映中' : '上映予定' %></h2><br>
+
+<%= form_with url: movie_path(@movie), local: true, method: :get do |f| %>
+<%= f.collection_select :theater_id, @theaters, :id, :name %>
+<%= f.submit "劇場からスケジュールを検索する" %>
+<% end %>
 
 <%= form_with url: "/movies/#{@movie.id}/reservation", local: true, method: :get, html: { id: 'date_form' } do |f| %>
 <%= f.collection_select :schedule_id, @schedules, :id, ->(schedule) { "#{schedule.schedule_date} #{schedule.start_time.strftime("%H:%M")} - #{schedule.end_time.strftime("%H:%M")}" } %>
