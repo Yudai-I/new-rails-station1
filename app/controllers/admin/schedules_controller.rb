@@ -7,6 +7,7 @@ module Admin
 
     def show
       @schedule = Schedule.find(params[:id])
+      @movies = Movie.all
     end
 
     def create
@@ -21,7 +22,8 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def new
       @schedule = Schedule.new
@@ -30,8 +32,14 @@ module Admin
 
     def update
       schedule = Schedule.find(params[:id])
-      schedule.update(schedule_params)
-      redirect_to admin_schedules_path(schedule.id)
+      if schedule.update(schedule_params)
+        flash[:notice] = "スケジュール更新に成功しました"
+        redirect_to admin_schedules_path
+      else
+        @schedule = Schedule.find(params[:id])
+        render :show
+        flash.now[:error] = "スケジュール更新に失敗しました"
+      end 
     end
 
     def destroy

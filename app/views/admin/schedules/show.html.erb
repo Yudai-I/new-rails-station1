@@ -1,34 +1,40 @@
 <h2>詳細ページ</h2>
 <table>
 <tr>
-<th>ID</th>
 <th>映画名</th>
-<th>開始日付</th>
-<th>開始時間</th>
-<th>終了時間</th>
+<th>日付</th>
+<th>時刻</th>
+<th>スクリーン番号</th>
+<th>映画館名</th>
 </tr>
 
 <tr>
-<td><%= @schedule.movie_id %></td>
 <td><%= @schedule.movie.name %></td>
 <td><%= @schedule.schedule_date %></td>
-<td><%= @schedule.start_time %></td>
-<td><%= @schedule.end_time %></td>
-<td><%= link_to '戻る', request.referer %></td>
+<td><%= @schedule.start_time.strftime('%H:%M') + "～" + @schedule.end_time.strftime('%H:%M') %></td>
+<td><%= @schedule.screen_id %></td>
+<td><%= @schedule.theater.name %></td>
 </tr>
 </table>
 
 <%= form_with model: [:admin, @schedule] do |f| %>
 <table>
 <tr>
-<th>開始日付</th>
-<th>開始時間</th>
-<th>終了時間</th>
+<th>映画名</th>
+<th>日付</th>
+<th>時刻</th>
+<th>スクリーン番号</th>
+<th></th>
+<th>映画館名</th>
 </tr>
 
 <tr>
-<td><%= f.text_field :start_time %></td>
-<td><%= f.text_field :end_time %></td>
+<td><%= f.collection_select :movie_id, @movies, :id, :name %></td>
+<td><%= f.date_select :schedule_date %></td>
+<td><%= f.time_select :start_time %></td>
+<td><%= f.time_select :end_time %></td>
+<td><%= f.select :screen_id, options_for_select(1..3) %></td>
+<td><%= f.collection_select :theater_id, Theater.all, :id, :name %></td>
 <td><%= f.submit '更新' %>
 </tr>
 </table>

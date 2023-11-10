@@ -1,12 +1,12 @@
-<h2>全スケジュール一覧<h2/>
+<h2>全スケジュール一覧</h2>
+<%= flash[:notice] %>
 <%= link_to '映画一覧', admin_movies_path %>
 <table>
 <tr>
 <th>ID</th>
 <th>映画名</th>
-<th>開始日付</th>
-<th>開始時間</th>
-<th>終了時間</th>
+<th>日付</th>
+<th>時刻</th>
 <th>スクリーン番号</th>
 <th>映画館名</th>
 </tr>
@@ -15,10 +15,10 @@
       <td><%= schedule.movie_id %></td>
       <td><%= link_to "#{schedule.movie.name}", admin_schedule_path(schedule.id) %></td>
       <td><%= schedule.schedule_date %></td>
-      <td><%= schedule.start_time %></td>
-      <td><%= schedule.end_time %></td>
+      <td><%= schedule.start_time.strftime('%H:%M') + "～" + schedule.end_time.strftime('%H:%M') %></td>
       <td><%= schedule.screen_id %></td>
       <td><%= schedule.theater.name %></td>
+      <td><%= link_to 'スケジュール詳細ページ', admin_schedule_path(schedule.id) %>
       <td><%= link_to '削除', admin_schedule_path(schedule.id), method: :delete %></td>
     </tr>
   <% end %>

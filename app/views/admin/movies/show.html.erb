@@ -15,7 +15,6 @@
 <td><%= image_tag @movie.image_url %></td>
 <td><%= @movie.is_showing == true ? '上映中' : '上映予定' %></td>
 <td><%= link_to 'スケジュール作成',  new_admin_movie_schedule_path(@movie) %></td>
-<td><%= link_to "スケジュール", admin_schedule_path(@movie.id) %></td>
 </tr>
 </table>
 
@@ -26,7 +25,8 @@
       <td><%= link_to "#{schedule.movie.name}", admin_schedule_path(schedule.id) %></td>
       <td><%= schedule.start_time %></td>
       <td><%= schedule.end_time %></td>
-      <td><%= link_to '削除', admin_schedule_path(schedule.id), method: :delete %></td>
+      <td><%= link_to "スケジュール詳細", admin_schedule_path(@movie.id) %></td>
+      <td><%= link_to 'スケジュール削除', admin_schedule_path(schedule.id), method: :delete %></td>
     </tr>
   <% end %>
 </table>

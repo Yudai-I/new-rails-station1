@@ -1,10 +1,10 @@
 <%= form_with model: [:admin, @reservation], url: admin_reservation_path, local: true do |f| %>
-<h4>映画館名</h4>
-<%= f.text_field :theater_id %>
 <h4> スケジュールID </h4>
-<%= f.text_field :schedule_id %>
+<%= f.select :schedule_id, options_from_collection_for_select(@schedules, 'id', lambda { |schedule| 
+  "#{schedule.theater.name} #{schedule.movie.name} #{schedule.start_time.strftime('%H:%M')} - #{schedule.end_time.strftime('%H:%M')}"
+}) %>
 <h4> 座席ID </h4>
-<%= f.text_field :sheet_id %>
+<%= f.select :sheet_id, options_for_select(1..15) %>
 <h4> 日時 </h4>
 <%= f.date_select(
         :date,

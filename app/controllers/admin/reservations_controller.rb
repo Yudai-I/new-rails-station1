@@ -10,6 +10,7 @@ module Admin
 
     def show
       @reservation = Reservation.find(params[:id])
+      @schedules = Schedule.all
     end
 
     def new
@@ -97,7 +98,7 @@ module Admin
     end
 
     def reservation_params
-      params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id, :theater_id)
+      params.require(:reservation).permit(:date, :name, :email, :schedule_id, :sheet_id)
     end
   end
 end

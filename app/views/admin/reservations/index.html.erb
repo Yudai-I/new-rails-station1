@@ -5,17 +5,21 @@
 <table>
 <% @reservations.each do |reservation| %>
  <tr>
+  <th>劇場名</th>
   <th>映画タイトル</th>
-  <th>座席</th>
+  <th>座席番号</th>
   <th>日時</th>
+  <th>時刻</th>
   <th>メールアドレス</th>
   <th>名前</th>
  <tr>
 
  <tr>
+  <td><%= reservation.schedule.theater.name %></td>
   <td><%= reservation.schedule.movie.name %></td>
   <td><%= reservation.sheet_id %></td>
   <td><%= reservation.date %></td>
+  <td><%= reservation.schedule.start_time.strftime('%H:%M') + "～" + reservation.schedule.end_time.strftime('%H:%M') %></td>
   <td><%= reservation.email %></td>
   <td><%= reservation.name %></td>
   <td><%= link_to '詳細', admin_reservation_path(reservation.id) %></td>
