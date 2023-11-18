@@ -1,5 +1,4 @@
 module Admin
-  # 管理者用の映画のスケジュールコントローラ
   class SchedulesController < ApplicationController
     def index
       @schedules = Schedule.all
@@ -17,9 +16,12 @@ module Admin
       if @schedule.save
         redirect_to admin_schedules_path
       else
-        flash.now[:error] = '値が空です'
-        render :new
+        flash[:notice] = 'スケジュールが被っています'
+        redirect_to admin_schedules_path
       end
+    rescue ActiveRecord::RecordNotUnique
+      flash[:notice] = '無効なスケジュールです'
+      redirect_to admin_schedules_path
     end
 
     def edit

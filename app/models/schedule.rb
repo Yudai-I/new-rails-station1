@@ -10,4 +10,15 @@ class Schedule < ApplicationRecord
 
   # Reservationモデルへの関連付けで、スケジュールが削除された際に予約も削除される
   has_many :reservations, dependent: :destroy
+  validate :unique_schedule_for_theater_and_screen
+
+  private
+
+  def unique_schedule_for_theater_and_screen
+    overlapping_schedule = Schedule.where(theater_id: theater_id, screen_id: screen_id, schedule_date: schedule_date)
+                                   .where("start_time < ? AND end_time > ?", end_time, start_time)
+                                   .exists?
+
+    errors.add(:base, "Schedule conflicts with an existing schedule") if overlapping_schedule
+  end
 end

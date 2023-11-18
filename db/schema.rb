@@ -38,10 +38,11 @@ ActiveRecord::Schema.define(version: 2023_11_05_135231) do
     t.date "schedule_date", null: false
     t.time "start_time", null: false
     t.time "end_time", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.bigint "screen_id", null: false
     t.bigint "theater_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["schedule_date", "start_time", "end_time", "screen_id", "theater_id"], name: "index_schedules_on_unique_combination", unique: true
     t.index ["screen_id"], name: "index_schedules_on_screen_id"
     t.index ["theater_id"], name: "index_schedules_on_theater_id"
   end
