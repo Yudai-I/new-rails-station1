@@ -18,7 +18,7 @@
   <td><%= reservation.schedule.theater.name %></td>
   <td><%= reservation.schedule.movie.name %></td>
   <td><%= reservation.sheet_id %></td>
-  <td><%= reservation.date %></td>
+  <td><%= reservation.schedule.schedule_date %></td>
   <td><%= reservation.schedule.start_time.strftime('%H:%M') + "～" + reservation.schedule.end_time.strftime('%H:%M') %></td>
   <td><%= reservation.email %></td>
   <td><%= reservation.name %></td>

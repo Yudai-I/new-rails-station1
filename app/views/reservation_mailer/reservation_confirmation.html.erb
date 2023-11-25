@@ -4,13 +4,12 @@
   <title>Reservation Confirmation</title>
 </head>
 <body>
-  <h1>予約確認</h1>
-  <p><%= @reservation.name %> 様、</p>
-  <p>以下の内容で予約が完了しました。</p>
-  <ul>
-    <li>映画館: <%= @reservation.schedule.theater.name %></li>
-    <li>作品: <%= @reservation.schedule.movie.name %></li>
-    <li>上映時刻: <%= @reservation.schedule.schedule_date %></li>
-  </ul>
+  <h1>予約情報の確認</h1>
+  <h4><%= @user.name%>様</h4>
+  <h4>映画館名: <%= @reservation.schedule.theater.name %></h4>
+  <h4>映画名: <%= @reservation.schedule.movie.name %></h4>
+  <h4>日付: <%= @reservation.schedule.schedule_date %></h4>
+  <h4>時刻: <%= @reservation.schedule.start_time.strftime('%H:%M') + "～" + @reservation.schedule.end_time.strftime('%H:%M') %></h4>
+ 
 </body>
 </html>

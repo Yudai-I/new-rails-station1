@@ -19,7 +19,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     if @reservation.save
       handle_successful_reservation
-      ReservationMailer.notice_booked(current_user).deliver_later
+      ReservationMailer.reservation_confirmation(current_user, @reservation).deliver_later
     else
       handle_failed_reservation
     end

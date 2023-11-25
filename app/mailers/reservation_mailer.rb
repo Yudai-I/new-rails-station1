@@ -1,5 +1,7 @@
 class ReservationMailer < ApplicationMailer
-    def notice_booked(user)
+    def reservation_confirmation(user, reservation)
+        @user = user
+        @reservation = reservation
         mail(
          to: @user.email,
          subject: 'ようこそほげほげ'
