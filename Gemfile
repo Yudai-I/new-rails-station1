@@ -68,3 +68,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise'
 
 gem 'dotenv-rails', groups: %i[development test]
+
+gem 'whenever', require: false
