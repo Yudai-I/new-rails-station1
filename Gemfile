@@ -70,3 +70,5 @@ gem 'devise'
 gem 'dotenv-rails', groups: %i[development test]
 
 gem 'whenever', require: false
+
+gem 'rake', '13.0.3'

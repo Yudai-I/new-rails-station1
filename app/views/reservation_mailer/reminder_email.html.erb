@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reservation Confirmation</title>
+</head>
+<body>
+  <h1>予約日前日となりました</h1>
+  <h4><%= @name %>様</h4>
+  <h4>映画館名: <%= @reservation.schedule.theater.name %></h4>
+  <h4>映画名: <%= @reservation.schedule.movie.name %></h4>
+  <h4>日付: <%= @reservation.schedule.schedule_date %></h4>
+  <h4>時刻: <%= @reservation.schedule.start_time.strftime('%H:%M') + "～" + @reservation.schedule.end_time.strftime('%H:%M') %></h4>
+ 
+</body>
+</html>
