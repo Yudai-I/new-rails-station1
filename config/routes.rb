@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'homes/top'
   devise_for :users, path_names: {
     sign_up: 'new'
   }
+  root to: 'homes#top'
 
   post 'reservations' => 'reservations#create'
   resources :sheets

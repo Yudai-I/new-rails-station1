@@ -26,6 +26,7 @@ module Admin
       if save_reservation
         redirect_to admin_reservations_path, notice: '予約の作成に成功しました'
       else
+        flash.now[:error] = "すでに予約されています"
         render :new, status: :bad_request
       end
     rescue ActiveRecord::RecordNotUnique
@@ -92,8 +93,8 @@ module Admin
 
     # 座席衝突時のエラーハンドリングを抽出したメソッド
     def handle_reservation_conflict
-      flash.now[:error] = 'その座席はすでに予約済みです'
       @reservation = Reservation.new(reservation_params)
+      flash.now[:error] = 'その座席はすでに予約済みです'
       render :new
     end
 
