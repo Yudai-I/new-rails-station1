@@ -1,16 +1,17 @@
-<h1>映画予約数ランキング</h1>
+<h1><%= @today %>時点の映画予約数ランキング</h1>
     <table>
         <tr>
             <th>順位</th>
             <th>映画名</th>
             <th>予約件数</th>
         </tr>
-        <% @movie_reservations.each_with_index do |(movie_id, count), i| %>
+        <% @rankings.each_with_index do |ranking, i| %>
             <tr>
                 <td><%= i+1 %>位</td>
-                <td><%= link_to "#{Movie.find_by(id: movie_id).name}", movie_path(movie_id) %></td>
-                <td><%= count %></td>
+                <td><%= link_to "#{Movie.find_by(id: ranking.movie_id).name}", movie_path(ranking.movie_id) %></td>
+                <td><%= ranking.count_reservations %></td>
             </tr>
         <% end %>
     </table>
+    <%= @movie_reservations %>
     
