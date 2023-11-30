@@ -1,2 +1,16 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<h1>映画予約数ランキング</h1>
+    <table>
+        <tr>
+            <th>順位</th>
+            <th>映画名</th>
+            <th>予約件数</th>
+        </tr>
+        <% @movie_reservations.each_with_index do |(movie_id, count), i| %>
+            <tr>
+                <td><%= i+1 %>位</td>
+                <td><%= link_to "#{Movie.find_by(id: movie_id).name}", movie_path(movie_id) %></td>
+                <td><%= count %></td>
+            </tr>
+        <% end %>
+    </table>
+    
