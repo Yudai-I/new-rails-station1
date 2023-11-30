@@ -1,0 +1,2 @@
+namespace :ranking do
+end
