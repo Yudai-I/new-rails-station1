@@ -4,12 +4,20 @@
             <th>順位</th>
             <th>映画名</th>
             <th>予約件数</th>
+            <th>順位変動</th>
+            <th>
+            <%= form_with url: root_path, local: true, method: :get do |f| %>
+                <%= f.collection_select :date_ranked, @rankings_for_select, :date_ranked, :date_ranked %>
+                <%= f.submit "日付を選んでランキング変動を確認する" %>
+                <% end %>
+            </th>
         </tr>
         <% @rankings.each_with_index do |ranking, i| %>
             <tr>
                 <td><%= i+1 %>位</td>
                 <td><%= link_to "#{Movie.find_by(id: ranking.movie_id).name}", movie_path(ranking.movie_id) %></td>
                 <td><%= ranking.count_reservations %></td>
+                <td><%= "#{@rankings_for_compare.index(ranking.movie_id)+1}位→#{i+1}位" %></td>
             </tr>
         <% end %>
     </table>
