@@ -37,7 +37,7 @@ env :GEM_PATH, ENV['GEM_PATH']
 
 job_type :rake, "cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
 
-#every 1.day, at: '5:10 pm' do # UTC時間に注意（日本時間の19時）
+#every 1.day, at: '10:00' do # UTC時間に注意（日本時間の19時）
 every 1.minute do
     rake "reminder:send_reminders"
     rake "ranking:insert_datas"

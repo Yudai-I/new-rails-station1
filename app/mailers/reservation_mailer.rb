@@ -7,7 +7,6 @@ class ReservationMailer < ApplicationMailer
 
     def reminder_email(reservation)
         @email = reservation.email
-        @name = reservation.name
         @reservation = reservation
         mail(to: @email, subject: '予約日前日のお知らせ')
     end
