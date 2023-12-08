@@ -13,6 +13,7 @@ module Admin
 
     def new
       @movie = Movie.new
+      @genres = Genre.all
     end
 
     def create

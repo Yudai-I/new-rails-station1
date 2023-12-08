@@ -27,3 +27,7 @@ Screen.create(screen_number: 3, theater_id: 2)
 Screen.create(screen_number: 1, theater_id: 3)
 Screen.create(screen_number: 2, theater_id: 3)
 Screen.create(screen_number: 3, theater_id: 3)
+
+Genre.create(genre: "action")
+Genre.create(genre: "horror")
+Genre.create(genre: "anime")

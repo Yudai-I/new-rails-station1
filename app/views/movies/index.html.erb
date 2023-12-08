@@ -25,6 +25,7 @@
  <tr>
   <th></th>
   <th>映画タイトル</th>
+  <th>ジャンル</th>
   <th>公開年</th>
   <th>上映中か</th>
   <th>概要</th>
@@ -44,6 +45,7 @@
   <% end %>
   </td>
   <td><%= movie.name %></td>
+  <td><%= movie.genre %></td>
   <td><%= movie.year %></td>
   <td><%= movie.is_showing == true ? '上映中' : '上映予定' %></td>
   <td><%= movie.description %></td>
