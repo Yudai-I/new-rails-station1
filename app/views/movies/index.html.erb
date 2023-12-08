@@ -15,6 +15,9 @@
 		<%= f.label :is_showing,"公開予定" %>
 		<%= f.radio_button :is_showing, '0', checked: params[:is_showing] == '0' %>
 	</div>
+  <div>
+  ジャンルの絞り込み<%= f.collection_select :genre, @genres, :genre, :genre %>
+  </div>
 <% end %>
   <div>
     <%= link_to '投稿フォーム', '/admin/movies/new' %>

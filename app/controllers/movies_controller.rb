@@ -2,7 +2,8 @@
 class MoviesController < ApplicationController
   def index
     @movie = Movie.new
-    @movies = filter_movies(params[:name], params[:is_showing])
+    @genres = Genre.all
+    @movies = filter_movies(params[:name], params[:is_showing], params[:genre])
   end
 
   def show
@@ -32,11 +33,11 @@ class MoviesController < ApplicationController
 
   private
 
-  def filter_movies(keyword, show)
+  def filter_movies(keyword, show, genre)
     range = case show
-            when '1' then Movie.where(is_showing: true)
-            when '0' then Movie.where(is_showing: false)
-            else Movie.all
+            when '1' then Movie.where(is_showing: true).where(genre: genre)
+            when '0' then Movie.where(is_showing: false).where(genre: genre)
+            else Movie.where(genre: genre)
             end
 
     return range if keyword.blank?
