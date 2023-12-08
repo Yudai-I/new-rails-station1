@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     get 'reservation' => 'movies#reservation'
   end
+  get 'favorites' => 'favorites#index'
 
   namespace :admin do
     resources :movies do

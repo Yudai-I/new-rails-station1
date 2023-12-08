@@ -15,8 +15,9 @@
     <% if user_signed_in? %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <span><%= link_to "映画一覧へ移動", movies_path %></span>
-      <span><%= link_to "映画ランキングへ移動", root_path %></span>
-      <span><%= link_to "admin/moviesに移動", admin_movies_path %></span>
+      <span><%= link_to "映画予約数ランキングへ移動", root_path %></span>
+      <span><%= link_to "映画いいね数ランキングへ移動", favorites_path %></span>
+      <span><%= link_to "admin/moviesへ移動", admin_movies_path %></span>
       <span><%=  link_to "マイページ", user_path(current_user.id) %></span>
     <% else %>
       <li>

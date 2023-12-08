@@ -1,4 +1,10 @@
 class FavoritesController < ApplicationController
+    def index
+        @favorite_counts = Favorite.group(:movie_id).count
+        # ハッシュのキーでソートして多い順に並び替える
+        @favorite_counts = @favorite_counts.sort_by { |k, v| v }.reverse.to_h
+    end
+
     def create
         movie = Movie.find(params[:movie_id])
         favorite = Favorite.new(movie_id: movie.id)

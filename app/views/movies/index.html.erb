@@ -35,7 +35,7 @@
   <td>
   <% if movie.favorited_by?(current_user) %>
   <%= link_to movie_favorites_path(movie.id), method: :delete do %>
-  ♥<%= movie.favorites.count %>いいね
+  <span class="favorite">♥</span><%= movie.favorites.count %>いいね
   <% end %>
   <% else %>
   <%= link_to movie_favorites_path(movie.id), method: :post do %>

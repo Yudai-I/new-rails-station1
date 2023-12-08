@@ -1,0 +1,5 @@
+<h1>いいね数ランキング</h1>
+<% @favorite_counts.each do |favorite| %>
+<%= Movie.find_by(id: favorite[0]).name %>
+<span class="favorite">♥</span><%= favorite[1] %><br>
+<% end %>
