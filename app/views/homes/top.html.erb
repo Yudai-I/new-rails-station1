@@ -17,7 +17,11 @@
                 <td><%= i+1 %>位</td>
                 <td><%= link_to "#{Movie.find_by(id: ranking.movie_id).name}", movie_path(ranking.movie_id) %></td>
                 <td><%= ranking.count_reservations %></td>
-                <td><%= "#{@rankings_for_compare.index(ranking.movie_id)+1}位→#{i+1}位" %></td>
+                <td>
+                <% if @rankings_for_compare.index(ranking.movie_id) %>
+                <%= "#{@rankings_for_compare.index(ranking.movie_id)+1}位→#{i+1}位" %>
+                <% end %>
+                </td>
             </tr>
         <% end %>
     </table>
