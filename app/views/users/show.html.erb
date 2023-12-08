@@ -1,4 +1,5 @@
 <h1>マイページ</h1>
+<%= flash[:notice] %>
 <h2>予約履歴</h2>
 <table>
 <% @reservations.each do |reservation| %>
@@ -19,6 +20,7 @@
   <td><%= reservation.schedule.movie.name %></td>
   <td><%= reservation.schedule.schedule_date %></td>
   <td><%= reservation.schedule.start_time.strftime('%H:%M') + "～" + reservation.schedule.end_time.strftime('%H:%M') %></td>
+  <td><%= link_to '削除', user_path(reservation.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
  </tr>
  <% end %>
 </table>
