@@ -12,4 +12,9 @@ class Movie < ApplicationRecord
 
   # 上映スケジュールを介して予約（Reservationモデル）との間に多対多の関連を持つ
   has_many :reservations, through: :schedules
+
+  has_many :favorites, dependent: :destroy
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
 end

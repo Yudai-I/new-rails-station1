@@ -18,4 +18,6 @@ class User < ApplicationRecord
   validates :password, presence: true
   # パスワード確認も必須
   validates :password_confirmation, presence: true
+
+  has_many :favorites, dependent: :destroy
 end
