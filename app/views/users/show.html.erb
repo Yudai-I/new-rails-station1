@@ -1,2 +1,24 @@
 <h1>マイページ</h1>
+<h2>予約履歴</h2>
+<table>
+<% @reservations.each do |reservation| %>
+ <tr>
+  <th>劇場名</th>
+  <th>スクリーン番号</th>
+  <th>座席番号</th>
+  <th>映画タイトル</th>
+  <th>座席番号</th>
+  <th>日時</th>
+  <th>時刻</th>
+ <tr>
 
+ <tr>
+  <td><%= reservation.schedule.theater.name %></td>
+  <td><%= reservation.schedule.screen.screen_number %>
+  <td><%= reservation.sheet.id %>
+  <td><%= reservation.schedule.movie.name %></td>
+  <td><%= reservation.schedule.schedule_date %></td>
+  <td><%= reservation.schedule.start_time.strftime('%H:%M') + "～" + reservation.schedule.end_time.strftime('%H:%M') %></td>
+ </tr>
+ <% end %>
+</table>
