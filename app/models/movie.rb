@@ -14,6 +14,7 @@ class Movie < ApplicationRecord
   has_many :reservations, through: :schedules
 
   has_many :favorites, dependent: :destroy
+  belongs_to :genre
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
