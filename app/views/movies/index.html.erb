@@ -23,6 +23,7 @@
 	
 <table>
  <tr>
+  <th></th>
   <th>映画タイトル</th>
   <th>公開年</th>
   <th>上映中か</th>
@@ -31,6 +32,17 @@
  <tr>
 <% @movies.each do |movie| %>
  <tr>
+  <td>
+  <% if movie.favorited_by?(current_user) %>
+  <%= link_to movie_favorites_path(movie.id), method: :delete do %>
+  ♥<%= movie.favorites.count %>いいね
+  <% end %>
+  <% else %>
+  <%= link_to movie_favorites_path(movie.id), method: :post do %>
+  ♡<%= movie.favorites.count %> いいね
+  <% end %>
+  <% end %>
+  </td>
   <td><%= movie.name %></td>
   <td><%= movie.year %></td>
   <td><%= movie.is_showing == true ? '上映中' : '上映予定' %></td>
