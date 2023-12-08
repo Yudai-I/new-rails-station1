@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @theaters = Theater.all
-    @schedules = filter_schedules(params[:theater_id])
+    @schedules = filter_schedules(params[:id], params[:theater_id])
   end
 
   def reservation
@@ -44,9 +44,9 @@ class MoviesController < ApplicationController
     range.where('name LIKE ? OR description LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
 
-  def filter_schedules(id)
-    range = Schedule.all
-    return range.where(theater_id: id)
+  def filter_schedules(movie_id, theater_id)
+    range = Schedule.where(movie_id: movie_id)
+    return range.where(theater_id: theater_id)
   end
 
   def handle_empty_reservation(movie_id, schedule)

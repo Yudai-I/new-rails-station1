@@ -14,8 +14,10 @@
 <%= @sheet %>
 <%= f.hidden_field :sheet_id, value: @sheet %>
 <h4>氏名</h4>
-<%= f.text_field :name %>
+<%= current_user.name %>
+<%= f.hidden_field :name, value: current_user.name %>
 <h4>メールアドレス</h4>
-<%= f.text_field :email, type: 'email', required: true %>
+<%= current_user.email %>
+<%= f.hidden_field :email, value: current_user.email %><br>
 <%= f.submit '座席を予約する' %>
 <% end %>
