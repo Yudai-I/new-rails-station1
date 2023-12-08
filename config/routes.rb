@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     sign_up: 'new'
   }
   root to: 'homes#top'
+  resources :users
 
   post 'reservations' => 'reservations#create'
   resources :sheets
